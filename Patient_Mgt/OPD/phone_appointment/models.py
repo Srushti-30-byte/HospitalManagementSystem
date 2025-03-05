@@ -205,3 +205,29 @@ class ExpressRegistration(models.Model):
 
     def __str__(self):
         return f"{self.prefix} {self.first_name} {self.last_name} - {self.hospital} ({self.visit_date})"
+
+
+# Phone Appointment List Model
+class PhoneAppointmentList(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    doctor = models.CharField(max_length=255)
+    doctor_mobile = models.CharField(max_length=15)  # New Field
+    ref_doctor_name = models.CharField(max_length=255)  # New Field
+    from_date = models.DateField()
+    to_date = models.DateField()
+    mobile_number = models.CharField(max_length=15)
+    appointment_type = models.CharField(
+        max_length=50,
+        choices=[("OPD", "OPD"), ("IPD", "IPD"), ("Emergency", "Emergency")],
+    )
+    appointment_date = models.DateField()
+    appointment_time = models.TimeField()
+    department = models.CharField(max_length=100)
+    status = models.CharField(
+        max_length=20,
+        choices=[("Kept", "Kept"), ("Cancelled", "Cancelled"), ("Pending", "Pending")],
+    )
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.appointment_date}"
