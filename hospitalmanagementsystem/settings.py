@@ -43,6 +43,13 @@ INSTALLED_APPS = [
     "Patient_Mgt.OPD.express_registration",
     "Patient_Mgt.OPD.regular_registration",
     "Patient_Mgt.OPD.queue_management",
+    "Patient_Mgt.OPD.medical_records",
+    "Patient_Mgt.OPD.opd_bill",
+    "Patient_Mgt.OPD.OP_patient_payment",
+    "Patient_Mgt.OPD.company_settlement",
+    "Patient_Mgt.OPD.bill_refund",
+    "Patient_Mgt.OPD.opd_refund",
+    "Patient_Mgt.OPD.prescriptions",
 ]
 
 MIDDLEWARE = [

@@ -39,7 +39,13 @@ urlpatterns = [
     path("api/", include("Patient_Mgt.OPD.express_registration.urls")),
     path("api/", include("Patient_Mgt.OPD.regular_registration.urls")),
     path("api/", include("Patient_Mgt.OPD.queue_management.urls")),
-    # Swagger endpoints:
+    path("api/", include("Patient_Mgt.OPD.medical_records.urls")),
+    path("api/", include("Patient_Mgt.OPD.opd_bill.urls")),
+    path("api/", include("Patient_Mgt.OPD.OP_patient_payment.urls")),
+    path("api/", include("Patient_Mgt.OPD.company_settlement.urls")),
+    path("api/", include("Patient_Mgt.OPD.bill_refund.urls")),
+    path("api/", include("Patient_Mgt.OPD.opd_refund.urls")),
+    path("api/", include("Patient_Mgt.OPD.prescriptions.urls")),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
