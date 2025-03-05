@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     "Patient_Mgt.OPD.bill_refund",
     "Patient_Mgt.OPD.opd_refund",
     "Patient_Mgt.OPD.prescriptions",
+    "Patient_Mgt.OPD.followup_list",
+    "Patient_Mgt.OPD.visitor_management",
+    "Patient_Mgt.OPD.courier_management",
+    "Patient_Mgt.OPD.vaccination",
 ]
 
 MIDDLEWARE = [
@@ -88,8 +92,12 @@ WSGI_APPLICATION = "hospitalmanagementsystem.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "hospital_mgt_system",
+        "USER": "root",
+        "PASSWORD": "srushti12",
+        "HOST": "localhost",  # Change if using a remote server
+        "PORT": "3306",  # Default MySQL port
     }
 }
 

@@ -46,6 +46,10 @@ urlpatterns = [
     path("api/", include("Patient_Mgt.OPD.bill_refund.urls")),
     path("api/", include("Patient_Mgt.OPD.opd_refund.urls")),
     path("api/", include("Patient_Mgt.OPD.prescriptions.urls")),
+    path("api/", include("Patient_Mgt.OPD.followup_list.urls")),
+    path("api/", include("Patient_Mgt.OPD.visitor_management.urls")),
+    path("api/", include("Patient_Mgt.OPD.courier_management.urls")),
+    path("api/", include("Patient_Mgt.OPD.vaccination.urls")),
     path(
         "swagger/",
         schema_view.with_ui("swagger", cache_timeout=0),
