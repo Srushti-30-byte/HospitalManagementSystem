@@ -9,7 +9,8 @@ class PhoneAppointment(models.Model):
         ("new", "New Patient"),
         ("registered", "Registered Patient"),
     ]
-    patient_type = models.CharField(max_length=15, choices=PATIENT_TYPE_CHOICES)
+    patient_type = models.CharField(
+        max_length=15, choices=PATIENT_TYPE_CHOICES)
 
     PREFIX_CHOICES = [
         ("Mr", "Mr"),
@@ -39,12 +40,15 @@ class PhoneAppointment(models.Model):
     appointment_date = models.DateField()
     appointment_time = models.TimeField(default=timezone.now)
 
-    APPOINTMENT_STATUS_CHOICES = [
-        ("given", "Appointment Given"),
-        ("kept", "Appointment Kept"),
+    YES_NO_CHOICES = [
+        ("yes", "Yes"),
+        ("no", "No"),
     ]
-    appointment_status = models.CharField(
-        max_length=15, choices=APPOINTMENT_STATUS_CHOICES
+    appointment_given = models.CharField(
+        max_length=3, choices=YES_NO_CHOICES, default="no"
+    )
+    appointment_kept = models.CharField(
+        max_length=3, choices=YES_NO_CHOICES, default="no"
     )
 
     # Doctor Schedule
@@ -80,8 +84,10 @@ class ExpressRegistration(models.Model):
         ("new", "New Registration"),
         ("registered", "Registered"),
     ]
-    patient_status = models.CharField(max_length=15, choices=PATIENT_STATUS_CHOICES)
-    uhid = models.CharField(max_length=50, blank=True, null=True)  # Unique Health ID
+    patient_status = models.CharField(
+        max_length=15, choices=PATIENT_STATUS_CHOICES)
+    uhid = models.CharField(max_length=50, blank=True,
+                            null=True)  # Unique Health ID
     PREFIX_CHOICES = [
         ("Mr", "Mr"),
         ("Miss", "Miss"),
@@ -145,7 +151,8 @@ class ExpressRegistration(models.Model):
         ("insurance", "Insurance"),
         ("corporate", "Corporate"),
     ]
-    patient_type = models.CharField(max_length=20, choices=PATIENT_TYPE_CHOICES)
+    patient_type = models.CharField(
+        max_length=20, choices=PATIENT_TYPE_CHOICES)
     company = models.CharField(max_length=100, blank=True, null=True)
     tariff = models.CharField(max_length=50)
     DEPARTMENT_CHOICES = [
@@ -201,7 +208,8 @@ class ExpressRegistration(models.Model):
     # Miscellaneous
     warning = models.TextField(blank=True, null=True)
     is_mlc = models.BooleanField(default=False)
-    attachment = models.FileField(upload_to="attachments/", blank=True, null=True)
+    attachment = models.FileField(
+        upload_to="attachments/", blank=True, null=True)
 
     def __str__(self):
         return f"{self.prefix} {self.first_name} {self.last_name} - {self.hospital} ({self.visit_date})"
@@ -226,7 +234,8 @@ class PhoneAppointmentList(models.Model):
     department = models.CharField(max_length=100)
     status = models.CharField(
         max_length=20,
-        choices=[("Kept", "Kept"), ("Cancelled", "Cancelled"), ("Pending", "Pending")],
+        choices=[("Kept", "Kept"), ("Cancelled", "Cancelled"),
+                 ("Pending", "Pending")],
     )
 
     def __str__(self):

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d0ad8803-c214-42d0-bcde-a6e718c58c3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/hospitalmanagementsystem/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalmanagementsystem/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalmanagementsystem/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalmanagementsystem/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +54,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -70,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741254555553</updated>
-      <workItem from="1741254559681" duration="307000" />
+      <workItem from="1741254559681" duration="698000" />
     </task>
     <servers />
   </component>
