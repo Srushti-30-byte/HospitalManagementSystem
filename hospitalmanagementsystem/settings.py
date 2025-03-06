@@ -10,11 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
+import os
+
+from django.contrib import staticfiles
+from django.template.context_processors import media
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -26,7 +33,8 @@ SECRET_KEY = "django-insecure-(a=ej)v%#o7zi=xx89_wu_x)x243ik8_#n4b$qy&#wwwj_@19p
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'hospitalmanagementsystem.settings')
 
 # Application definition
 
@@ -39,27 +47,19 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
-    "django_filters",
     "Patient_Mgt.OPD.phone_appointment",
     "Patient_Mgt.OPD.express_registration",
     "Patient_Mgt.OPD.regular_registration",
     "Patient_Mgt.OPD.queue_management",
-    "Patient_Mgt.OPD.medical_records",
-    "Patient_Mgt.OPD.opd_bill",
-    "Patient_Mgt.OPD.OP_patient_payment",
-    "Patient_Mgt.OPD.company_settlement",
-    "Patient_Mgt.OPD.bill_refund",
-    "Patient_Mgt.OPD.opd_refund",
-    "Patient_Mgt.OPD.prescriptions",
-    "Patient_Mgt.OPD.followup_list",
-    "Patient_Mgt.OPD.visitor_management",
-    "Patient_Mgt.OPD.courier_management",
-    "Patient_Mgt.OPD.vaccination",
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Asia/Kolkata"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -137,9 +137,60 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
+
+USER_FILES_BASE_PATH = BASE_DIR
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        },
+        'Basic': {
+            'type': 'basic'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
